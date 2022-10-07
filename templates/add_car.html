@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+        <!--====== App Content ======-->
+        <div class="app-content">
+
+            <!--====== Section 1 ======-->
+            <div class="u-s-p-y-60">
+
+                <!--====== Section Content ======-->
+                <div class="section__content">
+                    <div class="container">
+                        <div class="breadcrumb">
+                            <div class="breadcrumb__wrap">
+                                <ul class="breadcrumb__list">
+                                    <li class="has-separator">
+
+                                        <a href="index.html">Home</a></li>
+                                    <li class="is-marked">
+
+                                        <a href="dash-edit-profile.html">Cars</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--====== End - Section 1 ======-->
+
+
+            <!--====== Section 2 ======-->
+            <div class="u-s-p-b-60">
+
+                <!--====== Section Content ======-->
+                <div class="section__content">
+                    <div class="dash">
+                        <div class="container">
+                            <div class="row ">
+                                <div class="col-lg-9 col-md-12">
+                                    <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white">
+                                        <div class="dash__pad-2">
+                                            <h1 class="dash__h1 u-s-m-b-14">Enter the details</h1>
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <form class="dash-edit-p" method="post" action="{% url 'add_car' %}"  enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                            <div class="gl-inline">
+                                                            <div class="u-s-m-b-30">
+
+                                                                     <label class="gl-label" for="brand">Brand *</label>
+                                                                <select class="select-box select-box--primary-style" name="brand" id="brand" data-bill="">
+                                                    <option selected value="">Choose the Type</option>
+                                                    <option >Maruthi Suzuki</option>
+                                                    <option>Hyundayi</option>
+                                                    <option >Tata</option>
+                                                    <option >Mahindra</option>
+                                                    <option>Honda</option>
+                                                </select>
+
+                                                            </div>
+                                                            <div class="u-s-m-b-30">
+
+                                                                       <label class="gl-label" for="fuel">Fuel *</label>
+                                                                <select class="select-box select-box--primary-style" name="fuel" id="fuel" data-bill="">
+                                                    <option selected value="">Choose the Type</option>
+                                                    <option >CNG & Hybrids</option>
+                                                    <option >Diesel</option>
+                                                    <option>Electric</option>
+                                                    <option>Petrol</option>
+                                                    <option>LPG</option>
+                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="gl-inline">
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="driven">KM Driven *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="number" id="driven" name="driven" placeholder="KM Driven"></div>
+                                                            <div class="u-s-m-b-30">
+
+                                                                            <label class="gl-label" for="own">No of Owners *</label>
+                                                                <select class="select-box select-box--primary-style" name="own" id="own" data-bill="">
+                                                    <option selected value="">Choose the Type</option>
+                                                    <option >1st</option>
+                                                    <option >2nd</option>
+                                                    <option >3rd</option>
+                                                    <option >4th</option>
+                                                    <option >4+</option>
+                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="gl-inline">
+
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="images">Image *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="file" name="images" id="images" placeholder="Image"></div>
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="rent">Rent/Month *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="number" id="rent" name="rent" placeholder="Rent/Month"></div>
+                                                        </div>
+                                                        <div class="gl-inline">
+
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="ad_title">Ad title *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" name="ad_title" id="ad_title" placeholder="Key features of your item"></div>
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="add_info">Additional Information *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" id="add_info" name="add_info" placeholder="Include conditon,features and reason for selling"></div>
+                                                        </div>
+
+                                                        <button class="btn btn--e-brand-b-2" type="submit">SAVE</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====== End - Section Content ======-->
+            </div>
+            <!--====== End - Section 2 ======-->
+        </div>
+
+        {% endblock %}
