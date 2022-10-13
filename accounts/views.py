@@ -15,9 +15,6 @@ def login(request):
         email=request.POST['email']
         password=request.POST['password']
         user=authenticate(email=email, password=password)
-        print(email)
-        print(password)
-        print(user)
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'you are logged in')
@@ -40,9 +37,6 @@ def register(request):
         if Account.objects.filter(email=email).exists():
             messages.error(request, 'email already exists')
             return redirect('register')
-        # elif Account.objects.filter(username=username).exists():
-        #     messages.error(request, 'username already exists')
-        #     return redirect('register')
         else:
             user=Account.objects.create_user(email=email, password=password, fname=fname, lname=lname,  phone_number=phone_number)
             user.save()

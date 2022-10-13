@@ -46,7 +46,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index-2.html">
+                        <a class="main-logo" href="{% url 'home' %}">
 
                             <img src="images/logo/logo-2.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -81,25 +81,28 @@
 
                                         <!--====== Dropdown ======-->
 
+
                                         <span class="js-menu-toggle"></span>
                                         <ul style="width:120px">
                                             <li>
 
-                                                <a href="dashboard.html"><i class="fas fa-user-circle u-s-m-r-6"></i>
+                                                <a href="#"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
                                             {% if user.is_authenticated %}
-                                             <li>
 
-                                                <a href="#"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <li>
+
+                                                <a href="#"><i class="fas fa-lock-open u-s-m-r-6"></i>
 
                                                     <span>Hello {{user.fname}}</span></a></li>
-                                                <li>
+                                             <li>
 
                                                 <a href="{% url 'logout' %}"><i class="fas fa-lock-open u-s-m-r-6"></i>
 
                                                     <span>Signout</span></a></li>
                                             {% else %}
+
                                             <li>
 
                                                 <a href="{% url 'register' %}"><i class="fas fa-user-plus u-s-m-r-6"></i>
@@ -289,7 +292,7 @@
                                 <ul class="ah-list ah-list--design2 ah-list--link-color-white">
                                     <li>
 
-                                        <a href="#">NEW ARRIVALS</a></li>
+                                        <a href="{% url 'home' %}">HOME</a></li>
                                     <li class="has-dropdown">
 
                                         <a href="{% url 'shop' %}" >SHOP NOW<i class="fas u-s-m-l-6"></i></a>
@@ -329,7 +332,7 @@
                                 <ul class="ah-list ah-list--design1 ah-list--link-color-white">
                                     <li>
 
-                                        <a href="index-2.html"><i class="fas fa-home u-c-brand"></i></a></li>
+                                        <a href="{% url 'home' %}"><i class="fas fa-home u-c-brand"></i></a></li>
                                     <li>
 
                                         <a href="wishlist.html"><i class="far fa-heart"></i></a></li>

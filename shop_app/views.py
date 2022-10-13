@@ -1,32 +1,39 @@
 from django.shortcuts import render
-# from .models import Category
 from django.shortcuts import get_object_or_404, redirect, render
-from house_app. models import House_Product
-# from cart.models import CartItem, Cart
-# from cart.views import _cart_id
+
+from products.models import Car_Product, House_Product
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator, InvalidPage
 from django.db.models import Q
 # Create your views here.
+
+
 def shop(request, category_slug=None):
     categories = None
     products = None
 
     if category_slug != None:
-        products = House_Product.objects.filter( is_available=True)
+        h_products = House_Product.objects.filter( is_available=True)
+        c_products = Car_Product.objects.filter( is_available=True)
+
         paginator = Paginator(products, 1)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = products.count()
     else:
 
-        products = House_Product.objects.all().filter(is_available=True).order_by('id')
-        paginator = Paginator(products, 9)
+        h_products = House_Product.objects.all().filter(is_available=True).order_by('id')
+        c_products = Car_Product.objects.all().filter(is_available=True).order_by('id')
+
+        paginator = Paginator(h_products, 9)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
-        product_count = products.count()
+        product_count = h_products.count()
 
     context = {
-        'products': paged_products,
+        'h_products' : h_products,
+        'c_products': c_products,
+
+        # 'h_products': paged_products,
         'product_count': product_count,
     }
     return render(request, 'shop.html', context)
@@ -50,3 +57,33 @@ def shop(request, category_slug=None):
 #     except (EmptyPage,InvalidPage):
 #         products=paginator.page(paginator.num_pages)
 #     return render(request,"shop.html",{'category':c_page,'products':products})
+
+#
+# def my_products(request, total=0, quantity=0, cart_item=None, cart_items=None):
+#     try:
+#         tax = 0
+#         grand_total = 0
+#         if request.user.is_authenticated:
+#             cart_items = CartItem.objects.filter(
+#                 user=request.user, is_active=True)
+#         else:
+#             cart = Cart.objects.get(cart_id=_cart_id(request))
+#             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+#
+#         for cart_item in cart_items:
+#             total += (cart_item.product.price*cart_item.quantity)
+#             quantity += cart_item.quantity
+#         tax = (2*total)/100
+#         grand_total = total+tax
+#     except ObjectDoesNotExist:
+#         pass
+#
+#     context = {
+#         'total': total,
+#         'quantity': quantity,
+#         'cart_items': cart_items,
+#         'tax': tax,
+#         'grand_total': grand_total
+#     }
+#
+#     return render(request, 'cart.html', context)

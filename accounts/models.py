@@ -54,7 +54,7 @@ class Account(AbstractBaseUser):
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now_add=True)
     is_staff = models.BooleanField(default=True)
-    is_admin        = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
 
     is_active = models.BooleanField(default=True)
     is_superadmin = models.BooleanField(default=False)
@@ -75,4 +75,3 @@ class Account(AbstractBaseUser):
         return True
 
 
-from django.db import models

@@ -52,7 +52,7 @@
                         var a=document.getElementById('fname').value.trim();
                         var b=document.getElementById('lname').value.trim();
 
-                        var c=document.getElementById('email').value.trim();
+<!--                        var c=document.getElementById('email').value.trim();-->
                         var d=document.getElementById('password').value.trim();
 
                         var e=document.getElementById('cpassword').value.trim();
@@ -84,20 +84,20 @@
                             document.getElementById('ln').innerHTML="**Only Alphabets Allowed";
                             return false;
                         }
-                        if(c=="")
-                        {
-                            document.getElementById('el').innerHTML="**Please Enter Email";
-                            return false;
-                        }
-                        if(c.indexOf('@')<=0){
-                            document.getElementById('el').innerHTML="**Invalid  Email Address";
-                            return false;
-                        }
-                        if ((c.charAt(c.length-4)!='.') && (c.charAt(c.length-3)!='.'))
-                        {
-                            document.getElementById('el').innerHTML="**Invalid  Email Address";
-                            return false;
-                        }
+<!--                        if(c=="")-->
+<!--                        {-->
+<!--                            document.getElementById('el').innerHTML="**Please Enter Email";-->
+<!--                            return false;-->
+<!--                        }-->
+<!--                        if(c.indexOf('@')<=0){-->
+<!--                            document.getElementById('el').innerHTML="**Invalid  Email Address";-->
+<!--                            return false;-->
+<!--                        }-->
+<!--                        if ((c.charAt(c.length-4)!='.') && (c.charAt(c.length-3)!='.'))-->
+<!--                        {-->
+<!--                            document.getElementById('el').innerHTML="**Invalid  Email Address";-->
+<!--                            return false;-->
+<!--                        }-->
 
                        if(f=="")
                     {
@@ -146,7 +146,6 @@
                      document.getElementById('fn').innerHTML="";
                      document.getElementById('ln').innerHTML="";
 
-                     document.getElementById('el').innerHTML="";
                      document.getElementById('ph').innerHTML="";
 
                      document.getElementById('pss').innerHTML="";
@@ -201,7 +200,7 @@
 
                                                 <label class="gl-label" for="email">E-MAIL *</label>
 
-                                                <input class="input-text input-text--primary-style" type="email" name="email" id="email" placeholder="Enter E-mail" onclick="return onclear()">
+                                                <input class="input-text input-text--primary-style" type="email" name="email" id="email" placeholder="Enter E-mail" >
                                                 <span id="el" style="color: red;"></span>
 
                                             </div>
