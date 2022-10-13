@@ -2,6 +2,17 @@
 {% load static %}
 {% block content %}
 
+                                    {% include 'alerts2.html' %}
+
+                                      <script>
+                                          setTimeout(function(){
+                                            if ($('#message').length > 0){
+                                              $('#message').remove();
+                                              }
+                                            },3000)
+
+                                          </script>
+
 
         <!--====== App Content ======-->
         <div class="app-content">
