@@ -67,7 +67,7 @@ def register(request):
             send_mail(
                 'Please activate your account',
                 message,
-                'diyajacob1952001@gmail.com',
+                'anyrentplatfrom@gmail.com',
                 [email],
                 fail_silently=False,
             )
@@ -98,34 +98,4 @@ def activate(request, uidb64, token):
         return redirect('register')
 
 
-# def forgotPassword(request):
-#     if request.method == 'POST':
-#         email = request.POST['email']
-#         if Account.objects.filter(email=email).exists():
-#             user = Account.objects.get(email__exact=email)
-#
-#             # Reset password email
-#
-#             current_site = get_current_site(request)
-#             message = render_to_string('accounts/lost-password.html', {
-#                 'user': user,
-#                 'domain': current_site,
-#                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-#                 'token': default_token_generator.make_token(user),
-#             })
-#
-#             send_mail(
-#                 'Please activate your account',
-#                 message,
-#                 'msamilmanadiyil2560@gmail.com',
-#                 [email],
-#                 fail_silently=False,
-#             )
-#
-#             messages.success(request, 'Password reset email has been sent to your email address.')
-#             return redirect('login')
-#         else:
-#             messages.error(request, 'Account does not exist!')
-#             return redirect('forgotPassword')
-#     return render(request, 'accounts/lost-password.html')
 
