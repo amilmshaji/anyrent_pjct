@@ -123,8 +123,10 @@
                                                     </select></div>
                                             </form>
                                             <div class="m-order__list">
+                                                {% for c_product in c_products %}
 
                                                 <div class="m-order__get">
+
                                                     <div class="manage-o__header u-s-m-b-30">
                                                         <div class="dash-l-r">
                                                             <div>
@@ -142,8 +144,8 @@
                                                         <div class="description__container">
                                                             <div class="description__img-wrap">
 
-                                                                <img class="u-img-fluid" src="images/product/electronic/product3.jpg" alt=""></div>
-                                                            <div class="description-title">{{allproducts.house.ad_title}}</div>
+                                                                <img class="u-img-fluid"  src="{{c_product.images.url}}" style="width:600 height:600;" alt=""></div>
+                                                            <div class="description-title">{{c_product.product_name}}</div>
                                                         </div>
                                                         <div class="description__info-wrap">
                                                             <div>
@@ -162,6 +164,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {% endfor %}
+
 
                                                 <div class="m-order__get">
                                                     <div class="manage-o__header u-s-m-b-30">

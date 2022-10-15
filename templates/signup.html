@@ -42,14 +42,14 @@
                                     <h1 class="section__heading u-c-secondary">CREATE AN ACCOUNT</h1>
                                     {% include 'alerts.html' %}
 
-                                      <script>
-                                          setTimeout(function(){
-                                            if ($('#message').length > 0){
-                                              $('#message').remove();
-                                              }
-                                            },4000)
+<!--                                      <script>-->
+<!--                                          setTimeout(function(){-->
+<!--                                            if ($('#message').length > 0){-->
+<!--                                              $('#message').remove();-->
+<!--                                              }-->
+<!--                                            },4000)-->
 
-                                      </script>
+<!--                                      </script>-->
                                 </div>
                             </div>
                         </div>
@@ -57,114 +57,90 @@
                 </div>
                 <!--====== End - Section Intro ======-->
                 <script>
-                    function validateform()
-                    {
-                        var a=document.getElementById('fname').value.trim();
-                        var b=document.getElementById('lname').value.trim();
-
-<!--                        var c=document.getElementById('email').value.trim();-->
-                        var d=document.getElementById('password').value.trim();
-
-                        var e=document.getElementById('cpassword').value.trim();
-                                                var f=document.getElementById('tel').value.trim();
-
-
-
-
-                        var passpatern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-
-                        if(a=="")
-                        {
-                            document.getElementById('fn').innerHTML="**Please Enter First Name";
-                            return false;
-                        }
-                        if (/[^a-zA-Z]/.test(a))
-                        {
-                            document.getElementById('fn').innerHTML="**Only Alphabets Allowed";
-                            return false;
-                        }
-
-                         if(b=="")
-                        {
-                            document.getElementById('ln').innerHTML="**Please Enter Last Name";
-                            return false;
-                        }
-                        if (/[^a-zA-Z]/.test(b))
-                        {
-                            document.getElementById('ln').innerHTML="**Only Alphabets Allowed";
-                            return false;
-                        }
-<!--                        if(c=="")-->
-<!--                        {-->
-<!--                            document.getElementById('el').innerHTML="**Please Enter Email";-->
-<!--                            return false;-->
-<!--                        }-->
-<!--                        if(c.indexOf('@')<=0){-->
-<!--                            document.getElementById('el').innerHTML="**Invalid  Email Address";-->
-<!--                            return false;-->
-<!--                        }-->
-<!--                        if ((c.charAt(c.length-4)!='.') && (c.charAt(c.length-3)!='.'))-->
-<!--                        {-->
-<!--                            document.getElementById('el').innerHTML="**Invalid  Email Address";-->
-<!--                            return false;-->
-<!--                        }-->
-
-                       if(f=="")
-                    {
-                        document.getElementById('ph').innerHTML="**Please Enter Phone Number";
-                        return false;
-                    }
-                    if(f.length>10||f.length<10){
-                      document.getElementById('ph').innerHTML="**`Enter 10 digit valid phone Number`";
-                      return false;
-                    }
-
-                       if(f=="0000000000")
-                    {
-                        document.getElementById('ph').innerHTML="**Enter 10 digit valid phone Number";
-                        return false;
-                    }
-
-                    if (!/^[0-9]+$/.test(f))
-                        {
-                            document.getElementById('ph').innerHTML="**Only Numbers Allowed";
-                            return false;
-                        }
-
-                    if(d=="")
+                 function validate()
                 {
+					var f=document.getElementById("fname").value;
+					var l=document.getElementById("lname").value;
+					var s=/^[a-zA-Z]+$/;
+					if(f!="" && s.test(f)==false){
+
+						document.getElementById('fn').style.display = "block";
+						document.getElementById('fn').innerHTML = "Invalid Fname";
+						return false;
+					}
+					else{
+						document.getElementById('fn').style.display = "none";
+					}
+					if(l!="" && s.test(l)==false){
+
+						document.getElementById('ln').style.display = "block";
+						document.getElementById('ln').innerHTML = "Invalid Lname";
+						return false;
+					}
+					else{
+						document.getElementById('ln').style.display = "none";
+					}
+
+					var a=document.getElementById("email").value;
+					var st=/^[\w\+\'\.-]+@[\w\'\.-]+\.[a-zA-Z]{2,}$/;
+					if(a!="" && st.test(a)==false){
+
+						document.getElementById('el').style.display = "block";
+						document.getElementById('el').innerHTML = "Invalid Email id";
+						return false;
+					}
+					else{
+						document.getElementById('el').style.display = "none";
+					}
+
+					var ph = document.getElementById("tel").value;
+					var expr = /^[6-9]\d{9}$/;
+					if(ph!="" && expr.test(ph)==false){
+						document.getElementById('pe').style.display = "block";
+						document.getElementById('pe').innerHTML = "Invalid Phone number";
+						return false;
+								}
+								else{
+						document.getElementById('pe').style.display = "none";
+					}
+					 var d=document.getElementById('password').value;
+
+                     var e=document.getElementById('cpassword').value;
+                   if(d=="")
+                {
+                    document.getElementById('pss').style.display = "block";
+
                     document.getElementById('pss').innerHTML="**please enter  Password";
                     return false;
                 }
+                else{
+						document.getElementById('pss').style.display = "none";
+					}
                 if(e=="")
                 {
+                    document.getElementById('cpass').style.display = "block";
+
                     document.getElementById('cpss').innerHTML="**please enter Confirm Password";
                     return false;
                 }
 
                 if(d!=e)
                 {
+                    document.getElementById('cpss').style.display = "block";
+
                     document.getElementById('cpss').innerHTML="**Incorrect Password";
                     return false;
                 }
                         else
                           {
+                          	document.getElementById('cpss').style.display = "none";
+
                     return true;
                 }
-                }
-                function onclear(){
-                     document.getElementById('fn').innerHTML="";
-                     document.getElementById('ln').innerHTML="";
 
-                     document.getElementById('ph').innerHTML="";
 
-                     document.getElementById('pss').innerHTML="";
-
-                     document.getElementById('cpss').innerHTML="";
-
-                     }
-
-</script>
+				}
+                </script>
 
                 <!--====== Section Content ======-->
                 <div class="section__content">
@@ -176,23 +152,11 @@
                                         <h1 class="gl-h1">PERSONAL INFORMATION</h1>
                                         <form class="l-f-o__form" action="{% url 'register' %}" method="post" onsubmit="return validateform();">
                                             {% csrf_token %}
-<!--                                            <div class="gl-s-api">-->
-<!--                                                <div class="u-s-m-b-15">-->
-
-<!--                                                    <button class="gl-s-api_btn gl-s-api_btn&#45;&#45;fb" type="button"><i class="fab fa-facebook-f"></i>-->
-
-<!--                                                        <span>Signup with Facebook</span></button></div>-->
-<!--                                                <div class="u-s-m-b-30">-->
-
-<!--                                                    <button class="gl-s-api_btn gl-s-api_btn&#45;&#45;gplus" type="button"><i class="fab fa-google"></i>-->
-
-<!--                                                        <span>Signup with Google</span></button></div>-->
-<!--                                            </div>-->
                                             <div class="u-s-m-b-30">
 
                                                 <label class="gl-label" for="fname">FIRST NAME *</label>
 
-                                                <input class="input-text input-text--primary-style" type="text" name="fname" id="fname" placeholder="First Name" onclick=" return onclear()">
+                                                <input class="input-text input-text--primary-style" type="text" name="fname" id="fname" placeholder="First Name" onblur="return validate()" onKeyUp="return validate()" required pattern="[A-Za-z_]+">
                                                 <span id="fn" style="color: red;"></span>
 
 
@@ -201,7 +165,7 @@
 
                                                 <label class="gl-label" for="lname">LAST NAME *</label>
 
-                                                <input class="input-text input-text--primary-style" type="text" name="lname" id="lname" placeholder="Last Name" onclick=" return onclear()">
+                                                <input class="input-text input-text--primary-style" type="text" name="lname" id="lname" placeholder="Last Name" onblur="return validate()" onKeyUp="return validate()" required pattern="[A-Za-z_]+">
                                                 <span id="ln" style="color: red;"></span>
 
                                             </div>
@@ -210,7 +174,7 @@
 
                                                 <label class="gl-label" for="email">E-MAIL *</label>
 
-                                                <input class="input-text input-text--primary-style" type="email" name="email" id="email" placeholder="Enter E-mail" >
+                                                <input class="input-text input-text--primary-style" type="email" name="email" id="email" placeholder="Enter E-mail"  onblur="return validate()" onKeyUp="return validate()"  required >
                                                 <span id="el" style="color: red;"></span>
 
                                             </div>
@@ -218,8 +182,8 @@
 
                                                 <label class="gl-label" for="tel">PHONE NUMBER *</label>
 
-                                                <input class="input-text input-text--primary-style" type="text" name="tel" id="tel" placeholder="Enter 10 digits" onclick=" return onclear()">
-                                                <span id="ph" style="color: red;"></span>
+                                                <input class="input-text input-text--primary-style" type="text" name="tel" id="tel" placeholder="Enter 10 digits" onblur="return validate()" onKeyUp="return validate()"  minlength="10" maxlength="10" required>
+                                                <span id="pe" style="color: red;"></span>
 
                                             </div>
                                             <div class="u-s-m-b-30">
@@ -332,7 +296,7 @@
 
                                                 <label class="gl-label" for="cpassword">CONFIRM PASSWORD *</label>
 
-                                                <input class="input-text input-text--primary-style" type="password" name="cpassword" id="cpassword" placeholder="Enter Password" onclick=" return onclear()">
+                                                <input class="input-text input-text--primary-style" type="password" name="cpassword" id="cpassword" placeholder="Enter Password" onblur="return validate()" onKeyUp="return validate()" required>
                                                 <span id="cpss" style="color: red;"></span>
 
 

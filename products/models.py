@@ -27,6 +27,8 @@ class Category(models.Model):
 
 #house product table
 class House_Product(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+
     ad_title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True,editable=False)
     add_info = models.TextField(max_length=500, blank=True)
@@ -63,6 +65,8 @@ pre_save.connect(slug_generator,sender=House_Product)
 
 
 class Car_Product(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+
     ad_title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True,editable=False)
     add_info = models.TextField(max_length=500, blank=True)

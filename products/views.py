@@ -132,7 +132,7 @@ def add_other(request):
 #         'grand_total': grand_total
 #     }
 #
-#     return render(request, 'dash-my-order.html', context)
+#     return render(request, 'myproducts.html', context)
 
 def all_products(request):
     if request.user.is_authenticated:
@@ -141,4 +141,4 @@ def all_products(request):
         'allproducts': allproducts
 
     }
-    return render(request, 'dash-my-order.html', context)
+    return render(request, 'myproducts.html', context)

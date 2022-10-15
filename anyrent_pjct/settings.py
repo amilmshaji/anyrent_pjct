@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'accounts',
     'shop_app',
     'products',
+    'dashboard',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
