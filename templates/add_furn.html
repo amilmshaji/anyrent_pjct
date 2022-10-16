@@ -28,7 +28,70 @@
                 </div>
             </div>
             <!--====== End - Section 1 ======-->
+         <script>
+                 function validate()
+                {
+					var a=document.getElementById("type").value;
+					   if(a=="")
+                {
+                    document.getElementById('te').style.display = "block";
 
+                    document.getElementById('te').innerHTML="**Please enter  furniture type";
+                    return false;
+                }
+                else{
+						document.getElementById('te').style.display = "none";
+
+					}
+					 var expr = /^[0-9]+$/;
+			    var e = document.getElementById("rent").value;
+
+
+				if(e=="")
+                {
+                    document.getElementById('rt').style.display = "block";
+
+                    document.getElementById('rt').innerHTML="**Please Enter Rent";
+                    return false;
+                }
+					else if(e!="" && expr.test(e)==false){
+						document.getElementById('rt').style.display = "block";
+						document.getElementById('rt').innerHTML = "**Invalid Input";
+						return false;
+								}
+								else{
+						document.getElementById('rt').style.display = "none";
+
+					}
+										var i = document.getElementById("ad_title").value;
+					if(i=="")
+                {
+                    document.getElementById('at').style.display = "block";
+
+                    document.getElementById('at').innerHTML="**Please Enter Advertisment Title";
+                    return false;
+                }
+                else{
+						document.getElementById('at').style.display = "none";
+
+
+					}
+								    var j = document.getElementById("add_info").value;
+					if(j=="")
+                {
+                    document.getElementById('ai').style.display = "block";
+
+                    document.getElementById('ai').innerHTML="**Please Enter Advertisment Information";
+                    return false;
+                }
+                else{
+						document.getElementById('ai').style.display = "none";
+			            return true;
+
+					}
+
+			}
+			</script>
 
             <!--====== Section 2 ======-->
             <div class="u-s-p-b-60">
@@ -45,13 +108,13 @@
 
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <form class="dash-edit-p" method="post" action="{% url 'add_furn' %}"  enctype="multipart/form-data">
+                                                    <form class="dash-edit-p" method="post" action="{% url 'add_furn' %}"  enctype="multipart/form-data" onsubmit="return validate();">
                                                         {% csrf_token %}
                                                             <div class="gl-inline">
                                                             <div class="u-s-m-b-30">
 
                                                                      <label class="gl-label" for="type">Type *</label>
-                                                                <select class="select-box select-box--primary-style" name="type" id="type" data-bill="">
+                                                                <select class="select-box select-box--primary-style" name="type" id="type" data-bill="" onblur="return validate()" onKeyUp="return validate()">
                                                     <option selected value="">Choose the Type</option>
                                                     <option >sofa</option>
                                                     <option>Dining</option>
@@ -60,7 +123,7 @@
                                                     <option>Chairs</option>
                                                                     <option >Study Table</option>
                                                     <option>Cot</option>
-                                                </select>
+                                                </select><span id="te" style="color: red;"></span>
 
                                                             </div>
 <!--                                                            <div class="u-s-m-b-30">-->
@@ -83,12 +146,64 @@
 
                                                                 <label class="gl-label" for="images">Image *</label>
 
-                                                                <input class="input-text input-text--primary-style" type="file" name="images" id="images" placeholder="Image"></div>
+                                                                <input class="input-text input-text--primary-style" type="file" name="images" id="images" placeholder="Image" onblur="fileExtValidate1(images)" onsubmit="fileExtValidate1(images)"  accept="application/jpg">
+                                                                <span id="ermsg1" name="ermsg1" style="color:red"> </span>
+
+                                                                <script>
+
+
+                                                                var validExt = ".jpg,.jpeg,.png";
+                                                                function fileExtValidate1(fdata) {
+                                                                 var filePath = fdata.value;
+                                                                 var getFileExt = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+                                                                 var pos = validExt.indexOf(getFileExt);
+                                                                 if(pos < 0) {
+                                                                    //alert("This file is not allowed, please upload valid file.");
+                                                                                         document.getElementById("ermsg1").innerHTML='*only .jpg,.jpeg,.png images are allowed.' ;
+                                                                                          document.getElementById("image").value="";
+                                                                    return false;
+                                                                  } else {
+                                                                         document.getElementById("ermsg1").innerHTML="";
+                                                                    return true;
+                                                                  }
+                                                                }
+
+
+                                                                var maxSize = '1024';
+                                                                function fileSizeValidate1(fdata) {
+                                                                     if (fdata.files && fdata.files[0]) {
+                                                                                var fsize = fdata.files[0].size/1024;
+                                                                                if(fsize > maxSize) {
+                                                                                     //alert('Maximum file size exceed, This file size is: ' + fsize + "KB");
+                                                                                     document.getElementById("ermsg1").innerHTML='Maximum file size(1 MB) exceed, This file size is: '+ fsize + "KB" ;
+                                                                                     document.getElementById("image").value="";
+                                                                                     return false;
+                                                                                } else {
+                                                                                     document.getElementById("ermsg1").innerHTML="";
+                                                                                    return true;
+                                                                                }
+                                                                     }
+                                                                 }
+
+                                                                $("#image").change(function () {
+                                                                        if(fileExtValidate1(this)) {
+                                                                             if(fileSizeValidate1(this)) {
+                                                                                showImg(this);
+                                                                             }
+                                                                        }
+                                                                    });
+
+
+                                                                </script>
+                                                            </div>
                                                             <div class="u-s-m-b-30">
 
                                                                 <label class="gl-label" for="rent">Rent/Month *</label>
 
-                                                                <input class="input-text input-text--primary-style" type="number" id="rent" name="rent" placeholder="Rent/Month"></div>
+                                                                <input class="input-text input-text--primary-style" type="text" id="rent" name="rent" placeholder="Rent/Month" onblur="return validate()" onKeyUp="return validate()">
+                                                                                                                          <span id="rt" style="color: red;"></span>
+
+                                                            </div>
                                                         </div>
                                                         <div class="gl-inline">
 
@@ -96,12 +211,18 @@
 
                                                                 <label class="gl-label" for="ad_title">Ad title *</label>
 
-                                                                <input class="input-text input-text--primary-style" type="text" name="ad_title" id="ad_title" placeholder="Key features of your item"></div>
+                                                                <input class="input-text input-text--primary-style" type="text" name="ad_title" id="ad_title" placeholder="Key features of your item" onblur="return validate()" onKeyUp="return validate()">
+                                                                <span id="at" style="color: red;"></span>
+
+                                                            </div>
                                                             <div class="u-s-m-b-30">
 
                                                                 <label class="gl-label" for="add_info">Additional Information *</label>
 
-                                                                <input class="input-text input-text--primary-style" type="text" id="add_info" name="add_info" placeholder="Include conditon,features and reason for selling"></div>
+                                                                <input class="input-text input-text--primary-style" type="text" id="add_info" name="add_info" placeholder="Include conditon,features and reason for selling" onblur="return validate()" onKeyUp="return validate()">
+                                                                                                                            <span id="ai" style="color: red;"></span>
+
+                                                            </div>
                                                         </div>
 
                                                         <button class="btn btn--e-brand-b-2" type="submit">SAVE</button>
