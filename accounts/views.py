@@ -37,7 +37,7 @@ def login(request):
         else:
             messages.error(request, 'invalid login credentials')
             return redirect('login')
-    return render(request, 'signin.html')
+    return render(request, 'login.html')
 
 def register(request):
     if request.method == 'POST':
@@ -74,7 +74,7 @@ def register(request):
 
             return redirect('/login/?command=verification&email=' + email)
         # return redirect('/login')
-    return render(request, 'signup.html')
+    return render(request, 'register.html')
 
 
 def logout(request):
