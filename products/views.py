@@ -60,6 +60,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from .models import  Bike_Product
 
+@login_required(login_url='login')
 
 def add_bike(request):
     if request.method=="POST":
@@ -80,6 +81,8 @@ def add_bike(request):
 from .models import Furn_Product
 
 
+@login_required(login_url='login')
+
 def add_furn(request):
     if request.method=="POST":
         type = request.POST.get('type')
@@ -97,6 +100,8 @@ def add_furn(request):
 from .models import Other_Product
 
 
+@login_required(login_url='login')
+
 def add_other(request):
     if request.method=="POST":
         type = request.POST.get('type')
@@ -109,33 +114,6 @@ def add_other(request):
         car.save()
         return redirect('/')
     return render(request, 'add_other.html')
-
-
-# def all_products(request, total=0, quantity=0, cart_item=None, cart_items=None):
-#     try:
-#         tax = 0
-#         grand_total = 0
-#         if request.user.is_authenticated:
-#             p_items = All_Products.objects.filter(
-#                 user=request.user, is_active=True)
-#
-#         for p_item in p_items:
-#             total += (p_item.product.price * p_item.quantity)
-#             quantity += p_item.quantity
-#         tax = (2 * total) / 100
-#         grand_total = total + tax
-#     except ObjectDoesNotExist:
-#         pass
-#
-#     context = {
-#         'total': total,
-#         'quantity': quantity,
-#         'p_items': p_items,
-#         'tax': tax,
-#         'grand_total': grand_total
-#     }
-#
-#     return render(request, 'myproducts.html', context)
 
 def all_products(request):
     if request.user.is_authenticated:
