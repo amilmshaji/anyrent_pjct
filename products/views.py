@@ -12,6 +12,8 @@ def Category(request):
 
     return render(request, 'category.html')
 
+@login_required(login_url='login')
+
 def add_house(request):
     if request.method=="POST":
         type=request.POST.get('type')
@@ -34,6 +36,7 @@ def add_house(request):
 
 
 
+@login_required(login_url='login')
 
 def add_car(request):
     if request.method=="POST":
